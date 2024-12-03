@@ -18,6 +18,7 @@ const PORT = process.env?.PORT || 8000;
 require("express-async-errors");
 
 /* ------------------------------------------------- */
+// Configrations:
 
 // DB Connection
 const connectDB = require("./src/configs/dbConnection");
