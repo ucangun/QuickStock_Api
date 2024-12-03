@@ -24,6 +24,15 @@ const connectDB = require("./src/configs/dbConnection");
 connectDB();
 
 /* ------------------------------------------------- */
+// Middlewares:
+
+// Accept JSON:
+app.use(express.json());
+
+// res.getModelList():
+app.use(require("./src/middlewares/queryHandler"));
+
+/* ------------------------------------------------- */
 
 // errorHandler:
 app.use(require("./src/middlewares/errorHandler"));
