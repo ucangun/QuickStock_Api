@@ -28,6 +28,7 @@ const UserSchema = new mongoose.Schema(
         message:
           "Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, one number, and one special character.",
       },
+      // select: false,
     },
 
     email: {
@@ -83,5 +84,12 @@ UserSchema.pre("save", async function (next) {
 
   next();
 });
+
+UserSchema.methods.correctPassword = async function (
+  candidatePassword,
+  userPassword
+) {
+  return await bcrypt.compare(candidatePassword, userPassword);
+};
 
 module.exports = mongoose.model("User", UserSchema);
