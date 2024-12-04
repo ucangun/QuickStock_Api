@@ -9,7 +9,7 @@ const User = require("../models/user");
 const Token = require("../models/token");
 const { promisify } = require("util");
 const CustomError = require("../errors/customError");
-const passwordEncrypt = require("../helpers/passwordEncrypt");
+const tokenHash = require("../helpers/tokenHash");
 const { createSendToken } = require("../helpers/jwtFunctions");
 
 module.exports = {
@@ -37,13 +37,11 @@ module.exports = {
 
     // TOKEN:
     let tokenData = await Token.findOne({ userId: user._id });
-    console.log("Token FindOne Result:", tokenData);
     if (!tokenData)
       tokenData = await Token.create({
         userId: user._id,
-        token: passwordEncrypt(user._id + Date.now()),
+        token: tokenHash(user._id + Date.now()),
       });
-    console.log("Token Create Result:", tokenData);
 
     // JWT:
     createSendToken(user, 200, tokenData, res);
