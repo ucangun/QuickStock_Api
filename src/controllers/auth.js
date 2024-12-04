@@ -109,7 +109,9 @@ module.exports = {
 
     res.status(200).json({
       error: "false",
-      accessToken: newAccessToken,
+      bearer: {
+        accessToken: newAccessToken,
+      },
     });
   },
 
