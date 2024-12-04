@@ -19,8 +19,8 @@ const signRefreshToken = (id) => {
 };
 
 const createSendToken = (user, statusCode, tokenData, res) => {
-  const access = signAccessToken(user._id);
-  const refresh = signRefreshToken(user._id);
+  const accessToken = signAccessToken(user._id);
+  const refreshToken = signRefreshToken(user._id);
 
   // Remove password from output
   user.password = undefined;
@@ -29,8 +29,8 @@ const createSendToken = (user, statusCode, tokenData, res) => {
     error: "false",
     token: tokenData.token,
     bearer: {
-      access,
-      refresh,
+      accessToken,
+      refreshToken,
     },
     user,
   });
