@@ -35,6 +35,26 @@ app.use(require("./src/middlewares/queryHandler"));
 
 /* ------------------------------------------------- */
 
+// Routes:
+
+// HomePath:
+app.all("/", (req, res) => {
+  res.send({
+    error: false,
+    message: "Welcome to QUICKSTOCK API",
+    documents: {
+      swagger: "/documents/swagger",
+      redoc: "/documents/redoc",
+      json: "/documents/json",
+    },
+  });
+});
+
+// Routes:
+app.use(require("./src/routes"));
+
+/* ------------------------------------------------- */
+
 // errorHandler:
 app.use(require("./src/middlewares/errorHandler"));
 
