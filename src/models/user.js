@@ -9,7 +9,7 @@ const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const validatePassword = require("../helpers/validatePassword");
 
-const userSchema = new mongoose.Schema(
+const UserSchema = new mongoose.Schema(
   {
     username: {
       type: String,
@@ -74,7 +74,7 @@ const userSchema = new mongoose.Schema(
   { collection: "users", timestamps: true }
 );
 
-userSchema.pre("save", async function (next) {
+UserSchema.pre("save", async function (next) {
   // Only run this function if password was actually modified
   if (!this.isModified("password")) return next();
 
@@ -84,4 +84,4 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("User", UserSchema);
