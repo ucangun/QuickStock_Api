@@ -6,9 +6,9 @@
 
 const { pbkdf2Sync } = require("crypto"),
   keyCode = process.env.SECRET_KEY,
-  loopCount = 1000,
-  charCount = 32,
-  encType = "sha512";
+  loopCount = process.env.LOOP_COUNT,
+  charCount = process.env.CHAR_COUNT,
+  encType = process.env.CHAR_COUNT;
 
 module.exports = function (password) {
   return pbkdf2Sync(password, keyCode, loopCount, charCount, encType).toString(

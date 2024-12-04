@@ -4,6 +4,7 @@
 /*                  QUICKSTOCK API                   */
 /* ------------------------------------------------- */
 
+const cors = require("cors");
 const express = require("express");
 const app = express();
 
@@ -26,6 +27,15 @@ connectDB();
 
 /* ------------------------------------------------- */
 // Middlewares:
+
+// Cors
+const corsOptions = {
+  origin: [process.env.CLIENT_URL],
+  methods: ["GET", "POST", "PUT", "PATCH", "HEAD", "DELETE"],
+  optionsSuccessStatus: 200,
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 // Accept JSON:
 app.use(express.json());
