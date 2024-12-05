@@ -7,19 +7,23 @@
 const router = require("express").Router();
 
 const purchase = require("../controllers/brand");
+const permissions = require("../middlewares/permissions");
 const idValidation = require("../middlewares/idValidation");
 
 // URL: /purchases
 
-router.route("/").get(purchase.list).post(purchase.create);
+router
+  .route("/")
+  .get(permissions.isLogin, purchase.list)
+  .post(permissions.isLogin, purchase.create);
 
 router
   .route("/:id")
   .all(idValidation)
-  .get(purchase.read)
-  .put(purchase.update)
-  .patch(purchase.update)
-  .delete(purchase.delete);
+  .get(permissions.isLogin, purchase.read)
+  .put(permissions.isLogin, purchase.update)
+  .patch(permissions.isLogin, purchase.update)
+  .delete(permissions.isAdmin, purchase.delete);
 
 /* ------------------------------------------- */
 module.exports = router;
