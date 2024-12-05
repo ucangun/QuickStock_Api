@@ -31,7 +31,7 @@ connectDB();
 // Cors
 const corsOptions = {
   origin: [process.env.CLIENT_URL],
-  methods: ["GET", "POST", "PUT", "PATCH", "HEAD", "DELETE"],
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   optionsSuccessStatus: 200,
   credentials: true,
 };
@@ -39,6 +39,9 @@ app.use(cors(corsOptions));
 
 // Accept JSON:
 app.use(express.json());
+
+// Check Authentication:
+app.use(require("./src/middlewares/authentication"));
 
 // res.getModelList():
 app.use(require("./src/middlewares/queryHandler"));
