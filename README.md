@@ -68,8 +68,6 @@ You can explore the API using the following documentation tools:
 - Documenting the API with **Swagger UI** and **ReDoc**.
 - Handling **CORS** to enable cross-origin communication.
 
-
-![ERD](![erdStockAPI](https://github.com/user-attachments/assets/7db28439-189a-47b4-b2f3-5b0296bdb3c1))
-
+![ERD](./erdStockAPI.png)
 
 <p align="center">🚀 Happy Coding with QuickStock API! 🚀</p>
