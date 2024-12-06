@@ -14,7 +14,7 @@ const idValidation = require("../middlewares/idValidation");
 
 router
   .route("/")
-  .get(permissions.isLogin, purchase.list)
+  .get(permissions.isLogin, purchase.read)
   .post(permissions.isLogin, purchase.create);
 
 router
