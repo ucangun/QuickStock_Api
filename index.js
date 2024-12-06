@@ -35,7 +35,7 @@ connectDB();
 
 // Cors
 const corsOptions = {
-  origin: [process.env.CLIENT_URL],
+  origin: [process.env.CLIENT_URL || "http://localhost:5173"],
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   optionsSuccessStatus: 200,
   credentials: true,
