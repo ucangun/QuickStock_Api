@@ -6,8 +6,8 @@
 
 const router = require("express").Router();
 
-const token = require("../controllers/brand");
-const idValidation = require("../middlewares/idValidation");
+const token = require("../controllers/token");
+// const idValidation = require("../middlewares/idValidation");
 
 // URL: /brands
 

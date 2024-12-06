@@ -6,7 +6,7 @@
 
 const router = require("express").Router();
 
-const purchase = require("../controllers/brand");
+const purchase = require("../controllers/purchase");
 const permissions = require("../middlewares/permissions");
 const idValidation = require("../middlewares/idValidation");
 
