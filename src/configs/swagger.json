@@ -39,7 +39,1508 @@
   "produces": [
     "application/json"
   ],
-  "paths": {},
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Login",
+        "description": "Login with username (or email) and password for get Token and JWT.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "1234"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "JWT: Refresh",
+        "description": "Refresh access-token by refresh-token.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "bearer": {
+                  "type": "object",
+                  "properties": {
+                    "refresh": {
+                      "type": "string",
+                      "example": "___refreshToken___"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Token: Logout",
+        "description": "Delete token-key.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/users/": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "List Users",
+        "description": "  You can use <u>filter[] & search[] & sort[] & page & limit</u> queries with endpoint.  <ul> Examples:   <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>   <li>URL/?<b>sort[field1]=asc&sort[field2]=desc</b></li>   <li>URL/?<b>limit=10&page=1</b></li>  </ul>  ",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create User",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "1234"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "test@site.com"
+                },
+                "firstName": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "test"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get Single User",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update User",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "1234"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "test@site.com"
+                },
+                "firstName": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "test"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Delete User",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update User",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "1234"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "test@site.com"
+                },
+                "firstName": {
+                  "type": "string",
+                  "example": "test"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "test"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/tokens/": {
+      "get": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Get Single Brand",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Create Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Brand 1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/tokens/{id}": {
+      "get": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Get Single Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Update Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Brand 1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Delete Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Update Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Brand 1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/brands/": {
+      "get": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "List Brands",
+        "description": "  You can use <u>filter[] & search[] & sort[] & page & limit</u> queries with endpoint.  <ul> Examples:   <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>   <li>URL/?<b>sort[field1]=asc&sort[field2]=desc</b></li>   <li>URL/?<b>limit=10&page=1</b></li>  </ul>  ",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Create Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Brand 1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/brands/{id}": {
+      "get": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Get Single Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Update Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Brand 1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Delete Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Update Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Brand 1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/categories/": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "List Categories",
+        "description": "  You can use <u>filter[] & search[] & sort[] & page & limit</u> queries with endpoint.  <ul> Examples:   <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>   <li>URL/?<b>sort[field1]=asc&sort[field2]=desc</b></li>   <li>URL/?<b>limit=10&page=1</b></li>  </ul>  ",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Create Category",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Category 1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/categories/{id}": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Get Single Category",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Update Category",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Category 1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Delete Category",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Update Category",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Category 1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/firms/": {
+      "get": {
+        "tags": [
+          "Firms"
+        ],
+        "summary": "List Firms",
+        "description": "  You can use <u>filter[] & search[] & sort[] & page & limit</u> queries with endpoint.  <ul> Examples:   <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>   <li>URL/?<b>sort[field1]=asc&sort[field2]=desc</b></li>   <li>URL/?<b>limit=10&page=1</b></li>  </ul>  ",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Firms"
+        ],
+        "summary": "Create Firm",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Firm 1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/firms/{id}": {
+      "get": {
+        "tags": [
+          "Firms"
+        ],
+        "summary": "Get Single Firm",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Firms"
+        ],
+        "summary": "Update Firm",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Firm 1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Firms"
+        ],
+        "summary": "Delete Firm",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Firms"
+        ],
+        "summary": "Update Firm",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Firm 1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/products/": {
+      "get": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "List Brands",
+        "description": "  You can use <u>filter[] & search[] & sort[] & page & limit</u> queries with endpoint.  <ul> Examples:   <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>   <li>URL/?<b>sort[field1]=asc&sort[field2]=desc</b></li>   <li>URL/?<b>limit=10&page=1</b></li>  </ul>  ",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Create Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Brand 1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Get Single Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Update Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Brand 1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Delete Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Update Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Brand 1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/purchases/": {
+      "get": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "List Brands",
+        "description": "  You can use <u>filter[] & search[] & sort[] & page & limit</u> queries with endpoint.  <ul> Examples:   <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>   <li>URL/?<b>sort[field1]=asc&sort[field2]=desc</b></li>   <li>URL/?<b>limit=10&page=1</b></li>  </ul>  ",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Create Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Brand 1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/purchases/{id}": {
+      "get": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Get Single Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Update Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Brand 1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Delete Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Update Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Brand 1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/sales/": {
+      "get": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Get Single Brand",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Create Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Brand 1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/sales/{id}": {
+      "get": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Get Single Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Update Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Brand 1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Delete Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Brands"
+        ],
+        "summary": "Update Brand",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Brand 1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    }
+  },
   "definitions": {
     "User": {
       "type": "object",
